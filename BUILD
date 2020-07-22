@@ -3,9 +3,21 @@ load("@my_deps//:requirements.bzl", "requirement")
 py_binary(
   name = "test_numpy",
   srcs = ["//:test_numpy.py"],
-  deps = [
-      "//thirdparty/numpy_mac:pkg"
-      ],
+  deps = select({
+    ":mac": ["//thirdparty/numpy_mac:pkg"],
+    ":linux": ["//thirdparty/numpy_linux:pkg"],
+    "//conditions:default": [],
+  }),
+)
+
+config_setting(
+  name = "mac",
+  values = {"define": "platform=mac"},
+)
+
+config_setting(
+  name = "linux",
+  values = {"define": "platform=linux"},
 )
 
 py_binary(
