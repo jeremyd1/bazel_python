@@ -4,7 +4,7 @@ py_binary(
   name = "test_numpy",
   srcs = ["//:test_numpy.py"],
   deps = [
-      requirement("numpy"),
+      "//thirdparty/numpy_mac:pkg"
       ],
 )
 
